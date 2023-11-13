@@ -12,3 +12,4 @@ repos:
   hooks:
     - id: detect-aws-credentials
     - id: detect-private-key
+    - id: debug-statements
