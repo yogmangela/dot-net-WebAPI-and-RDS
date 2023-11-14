@@ -13,3 +13,9 @@ jobs:
         uses: actions/checkout@v4 
       - name: run terraform pre-commit hooks
         uses: ./
+      - name: initialize Terraform
+        run: terraform init --backend=false
+      - name: Plan Terraform
+        run: terraform plan 
+      # - name: apply Terraform
+      #   run: terraform apply --backend=false
