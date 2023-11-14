@@ -3,10 +3,10 @@ repos:
   rev: v1.83.5 # Get the latest from: https://github.com/antonbabenko/pre-commit-terraform/releases
   hooks:
     - id: terraform_fmt
-    # - id: terraform_docs
-    # - id: terraform_validate # Uncommnet this when using locally
-    # - id: terraform_tflint
-    # - id: terrascan 
+    - id: terraform_docs
+    - id: terraform_validate # Uncommnet this when using locally
+    - id: terraform_tflint
+    - id: terrascan 
 - repo: https://github.com/pre-commit/pre-commit-hooks 
   rev: v4.5.0
   hooks:
