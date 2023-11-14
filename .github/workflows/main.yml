@@ -11,11 +11,18 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4 
+
+      - name: Unit Test
+        uses: ...
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          run: aws s3 ls
       - name: run terraform pre-commit hooks
         uses: ./
       - name: initialize Terraform
         run: terraform init 
-      - name: Plan Terraform
-        run: terraform plan 
+      # - name: Plan Terraform
+      #   run: terraform plan 
       # - name: apply Terraform
-      #   run: terraform apply --backend=false
+      #   run: terraform apply 
