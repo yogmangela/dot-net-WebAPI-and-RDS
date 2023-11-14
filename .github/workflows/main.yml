@@ -12,8 +12,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4 
 
-      - name: Unit Test
-        uses: ...
+      - name: AWS Authentication.....
+        uses: ./
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
