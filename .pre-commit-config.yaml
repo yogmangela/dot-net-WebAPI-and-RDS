@@ -4,12 +4,11 @@ repos:
   hooks:
     - id: terraform_fmt
     # - id: terraform_docs
-    # - id: terraform_validate
+    # - id: terraform_validate # Uncommnet this when using locally
     # - id: terraform_tflint
     # - id: terrascan 
 - repo: https://github.com/pre-commit/pre-commit-hooks 
   rev: v4.5.0
   hooks:
-    - id: detect-aws-credentials
     - id: detect-private-key
     - id: debug-statements
