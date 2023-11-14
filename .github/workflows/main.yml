@@ -13,11 +13,16 @@ jobs:
         uses: actions/checkout@v4 
 
       - name: AWS Authentication.....
-        uses: ./
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          run: aws s3 ls
+      #   uses: ./
+      #   env:
+      #     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      #     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      #     run: aws s3 ls
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: eu-west-2
+          role-to-assume: github-assume-role
+
       - name: run terraform pre-commit hooks
         uses: ./
       - name: initialize Terraform
