@@ -3,7 +3,7 @@
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | v1.6.3 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.00 |
 | <a name="requirement_random"></a> [random](#requirement\_random) | 3.5.1 |
 
@@ -52,7 +52,10 @@
 
 ## Outputs
 
-No outputs.
+| Name | Description |
+|------|-------------|
+| <a name="output_rds_endpoint"></a> [rds\_endpoint](#output\_rds\_endpoint) | Output the RDS endpoint for reference |
+| <a name="output_webapi_endpoint"></a> [webapi\_endpoint](#output\_webapi\_endpoint) | n/a |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
 by Yogesh Mangela.
