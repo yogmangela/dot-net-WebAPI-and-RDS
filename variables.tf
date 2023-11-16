@@ -32,5 +32,6 @@ variable "region" {
 }
 
 variable "AWS_ACCOUNT" {
-  type = string
+  type    = string
+  default = "654288531125"
 }
