@@ -37,3 +37,87 @@ resource "aws_iam_role_policy_attachment" "webapi_s3_permissions" {
 }
 
 
+# IAM for codebuilder 
+
+data "aws_iam_policy_document" "assume_role" {
+  statement {
+    effect = "Allow"
+
+    principals {
+      type        = "Service"
+      identifiers = ["codebuild.amazonaws.com"]
+    }
+
+    actions = ["sts:AssumeRole"]
+  }
+}
+
+resource "aws_iam_role" "build" {
+  name               = "dot-net-build"
+  assume_role_policy = data.aws_iam_policy_document.assume_role.json
+}
+
+data "aws_iam_policy_document" "build" {
+  statement {
+    effect = "Allow"
+
+    actions = [
+      "logs:CreateLogGroup",
+      "logs:CreateLogStream",
+      "logs:PutLogEvents",
+    ]
+
+    resources = ["*"]
+  }
+
+  statement {
+    effect = "Allow"
+
+    actions = [
+      "ec2:CreateNetworkInterface",
+      "ec2:DescribeDhcpOptions",
+      "ec2:DescribeNetworkInterfaces",
+      "ec2:DeleteNetworkInterface",
+      "ec2:DescribeSubnets",
+      "ec2:DescribeSecurityGroups",
+      "ec2:DescribeVpcs",
+    ]
+
+    resources = ["*"]
+  }
+
+  statement {
+    effect    = "Allow"
+    actions   = ["ec2:CreateNetworkInterfacePermission"]
+    resources = ["arn:aws:ec2:eu-west-1:${var.AWS_ACCOUNT}:network-interface/*"]
+
+    condition {
+      test     = "StringEquals"
+      variable = "ec2:Subnet"
+
+      values = [
+        "module.vpc.public_subnets.*.arn"
+      ]
+    }
+
+    condition {
+      test     = "StringEquals"
+      variable = "ec2:AuthorizedService"
+      values   = ["codebuild.amazonaws.com"]
+    }
+  }
+
+  statement {
+    effect  = "Allow"
+    actions = ["s3:*"]
+    resources = [
+      "aws_s3_bucket.codebuild",
+      "${aws_s3_bucket.codebuild.arn}/*",
+    ]
+  }
+}
+
+resource "aws_iam_role_policy" "build_policy" {
+  role   = aws_iam_role.codebuild.arn
+  policy = data.aws_iam_policy_document.build.json
+}

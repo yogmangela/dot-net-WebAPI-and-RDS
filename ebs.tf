@@ -44,11 +44,6 @@ resource "aws_elastic_beanstalk_environment" "webapi_env" {
     value     = flatten(module.vpc.public_subnets)[0]
   }
 
-  # setting {
-  #   namespace = "aws:ec2:vpc"
-  #   name      = "AssociatePublicIpAddress"
-  #   value     = "True"
-  # }
   setting {
     namespace = "aws:elasticbeanstalk:application:environment"
     name      = "DATABASE_NAME"
@@ -65,7 +60,6 @@ resource "aws_elastic_beanstalk_environment" "webapi_env" {
     namespace = "aws:elasticbeanstalk:application:environment"
     name      = "DATABASE_PASSWORD"
     value     = aws_secretsmanager_secret_version.db-pass-val.secret_string
-    # value = aws_db_instance.webapi.password
   }
 
   setting {
@@ -93,17 +87,16 @@ resource "aws_elastic_beanstalk_environment" "webapi_env" {
     value     = var.instance_type
   }
 
-  #  uncomment below for Autoscaling EBS stack
-  #   setting {
-  #     namespace = "aws:autoscaling:asg"
-  #     name      = "MinSize"
-  #     value     = 1
-  #   }
-  #   setting {
-  #     namespace = "aws:autoscaling:asg"
-  #     name      = "MaxSize"
-  #     value     = 2
-  #   }
+  setting {
+    namespace = "aws:autoscaling:asg"
+    name      = "MinSize"
+    value     = 1
+  }
+  setting {
+    namespace = "aws:autoscaling:asg"
+    name      = "MaxSize"
+    value     = 2
+  }
   ################################################################################
   # Step 5: Configure updates, monitoring, and logging
   ################################################################################
@@ -118,21 +111,16 @@ resource "aws_elastic_beanstalk_environment" "webapi_env" {
     name      = "SystemType"
     value     = "enhanced"
   }
+
+  # Enable cloudwatch Logs for Elastic Beanstalk
+  setting {
+    namespace = "aws:elasticbeanstalk:cloudwatch:logs"
+    name      = "StreamLogs"
+    value     = "true"
+  }
+
   depends_on = [aws_db_instance.webapi]
 }
-
-
-# Enable cloudwatch Logs for Elastic Beanstalk
-#   setting {
-#     namespace = "aws:elasticbeanstalk:cloudwatch:logs"
-#     name      = "StreamLogs"
-#     value     = "true"
-#   }
-
-# # CloudWatch Alarms for WebAPI Auto Scaling
-# resource "aws_cloudwatch_metric_alarm" "webapi_scaling_alarm" {
-#   # ... (CloudWatch Alarm configuration)
-# }
 
 
 

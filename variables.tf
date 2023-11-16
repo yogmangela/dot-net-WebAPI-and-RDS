@@ -31,3 +31,6 @@ variable "region" {
   default = "eu-west-2"
 }
 
+variable "AWS_ACCOUNT" {
+  type = string
+}

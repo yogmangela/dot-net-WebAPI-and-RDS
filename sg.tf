@@ -25,22 +25,3 @@ resource "aws_security_group" "webapi_sg" {
   name        = "webapi-sg"
   description = "Security Group for WebAPI"
 }
-
-# resource "aws_security_group_rule" "webapi_sg_ingress" {
-#   security_group_id        = aws_security_group.webapi_sg.id
-#   type                     = "ingress"
-#   from_port                = 3306
-#   to_port                  = 3306
-#   protocol                 = "tcp"
-#   source_security_group_id = aws_elastic_beanstalk_environment.webapi_env.security_group_id
-# }
-
-# # RDS Security Group Rules
-# resource "aws_security_group_rule" "rds_sg_ingress" {
-#   security_group_id        = [aws_db_instance.webapi.vpc_security_group_ids] # "${aws_instance.ec2[*].id}"
-#   type                     = "ingress"
-#   from_port                = 3306
-#   to_port                  = 3306
-#   protocol                 = "tcp"
-#   source_security_group_id = aws_security_group.webapi_sg.id
-# }
