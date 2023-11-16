@@ -19,7 +19,7 @@ resource "aws_db_instance" "webapi" {
   # kms_key_id              = aws_kms_key.rds_kms_key.id
   backup_retention_period = 5
   multi_az                = true # Enable RDS monitoring  
-  monitoring_interval     = 5    # Enable RDS monitoring
+  monitoring_interval     = 0    # Enable RDS monitoring
 }
 
 resource "aws_launch_template" "webapi_rds" {
