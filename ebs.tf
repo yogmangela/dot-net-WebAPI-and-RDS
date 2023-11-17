@@ -75,42 +75,42 @@ resource "aws_elastic_beanstalk_environment" "webapi_env" {
   #   name      = "InstanceName"
   #   value     = "ami-0df034e631b8a333b"
   # }
-  setting {
-    namespace = "aws:autoscaling:launchconfiguration"
-    name      = "IamInstanceProfile"
-    value     = aws_iam_instance_profile.webapi_instance_profile.id
-  }
+  # setting {
+  #   namespace = "aws:autoscaling:launchconfiguration"
+  #   name      = "IamInstanceProfile"
+  #   value     = aws_iam_instance_profile.webapi_instance_profile.id
+  # }
 
-  setting {
-    namespace = "aws:autoscaling:launchconfiguration"
-    name      = "InstanceType"
-    value     = var.instance_type
-  }
+  # setting {
+  #   namespace = "aws:autoscaling:launchconfiguration"
+  #   name      = "InstanceType"
+  #   value     = var.instance_type
+  # }
 
-  setting {
-    namespace = "aws:autoscaling:asg"
-    name      = "MinSize"
-    value     = 1
-  }
-  setting {
-    namespace = "aws:autoscaling:asg"
-    name      = "MaxSize"
-    value     = 2
-  }
+  # setting {
+  #   namespace = "aws:autoscaling:asg"
+  #   name      = "MinSize"
+  #   value     = 1
+  # }
+  # setting {
+  #   namespace = "aws:autoscaling:asg"
+  #   name      = "MaxSize"
+  #   value     = 2
+  # }
   ################################################################################
   # Step 5: Configure updates, monitoring, and logging
   ################################################################################
-  setting {
-    namespace = "aws:elasticbeanstalk:environment:process:default"
-    name      = "MatcherHTTPCode"
-    value     = "200"
-  }
+  # setting {
+  #   namespace = "aws:elasticbeanstalk:environment:process:default"
+  #   name      = "MatcherHTTPCode"
+  #   value     = "200"
+  # }
 
-  setting {
-    namespace = "aws:elasticbeanstalk:healthreporting:system"
-    name      = "SystemType"
-    value     = "enhanced"
-  }
+  # setting {
+  #   namespace = "aws:elasticbeanstalk:healthreporting:system"
+  #   name      = "SystemType"
+  #   value     = "enhanced"
+  # }
 
   # Enable cloudwatch Logs for Elastic Beanstalk
   setting {
@@ -118,7 +118,6 @@ resource "aws_elastic_beanstalk_environment" "webapi_env" {
     name      = "StreamLogs"
     value     = "true"
   }
-
   depends_on = [aws_db_instance.webapi]
 }
 
