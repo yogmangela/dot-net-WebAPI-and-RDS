@@ -4,9 +4,9 @@ repos:
   hooks:
     - id: terraform_fmt
     - id: terraform_validate 
-    # - id: terraform_docs # Uncommnet this when using locally
-    # - id: terraform_tflint # Uncommnet this when using locally
-    # - id: terrascan # Uncommnet this when using locally.
+    - id: terraform_docs # Uncommnet this when using locally
+    - id: terraform_tflint # Uncommnet this when using locally
+    - id: terrascan # Uncommnet this when using locally.
 - repo: https://github.com/pre-commit/pre-commit-hooks 
   rev: v4.5.0
   hooks:
